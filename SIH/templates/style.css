@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap');
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+    font-family: 'Gilda Display', serif;
+}
+body{
+    background-color: rgba(128, 128, 128, 0.297);
+}
+.navbar{
+    padding:35px;
+    display:flex;
+    justify-content: space-between;
+}
+.sidepanel{
+    width:50%;
+    display:flex;
+    justify-content: space-evenly;
+}
+.heading{
+    width:100%;
+    text-align: center;
+    font-size:2.2em;
+    padding:50px;
+}
+a{
+    text-decoration-line: none;
+    color:black;
+    transition: 0.3s ease-in-out;
+}
+a:hover{
+    font-size: 28px;
+}
+
+.hero{
+    width:100vw;
+    /* border:3px solid black; */
+    padding:20px;
+    backdrop-filter: blur(20px);
+}
+.image_section{
+    /* border:3px solid red; */
+    padding:10px;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    margin:0px 10px 20px 0px;
+}
+.textarea{
+    width:50%;
+    height:500px;
+    /* border:2px solid blue; */
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    text-align:center;
+    margin-right:10px;
+    margin-left:10px;
+}
+.textarea h1{
+    width:100%;
+    font-size:3em;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+.textarea p{
+    font-size:1.2em;
+}
+.image{
+    width:50%;
+    display:flex;
+    height:100%;
+    /* border:2px solid black; */
+    justify-content: space-around;
+}
+
+.video_section{
+    /* border:3px solid red; */
+    padding:10px;
+    display:flex;
+    flex-direction:row-reverse;
+    justify-content:space-between;
+}
+.video{
+    width:50%;
+    display:flex;
+    flex-direction: column;
+    height:100%;
+    /* border:2px solid black; */
+    align-items: center;
+}
+
+#image-container {
+    width: 500px;
+    height: 500px;
+    border: 2px dashed #ddd;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-color: #615c5c;
+    text-align: center;
+}
+#uploaded-image {
+    width: 100%;
+    height: 100%; 
+}
+
+/* CSS for the upload button */
+#upload-button {
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height:10%;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px);
+    color: #fff;
+    border: none;
+    border-radius:0;
+    cursor: pointer;
+    font-size: 16px;
+    /* display: none; */
+    opacity: 0; 
+    transition-property:background-color, font-size, opacity;
+    transition-duration:0.3s;
+    transition-timing-function: ease-in-out; 
+}
+#upload-button:hover {
+    background-color: rgba(255, 255, 255, 0.01);
+    font-size:18px;
+    opacity:1;
+}
+
+/* Style for the file input */
+#file-input {
+    display: none;
+}
+#image-container:hover #upload-button {
+    display: block;
+    opacity: 1; 
+}
+
+#video-container {
+    width: 650px;
+    height: 500px;
+    border: 2px dashed #ddd;
+    border-radius: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-color: #f7f7f7c6;
+    text-align: center;
+}
+#upload-button2{
+    width: 650px;
+    height:40px;
+    margin-top:10px;
+    padding: 10px;
+    background-color: rgba(98, 95, 95, 0.641);
+    backdrop-filter: blur(25px);
+    color: #fff;
+    border: none;
+    border-radius:20px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition-property:background-color, font-size;
+    transition-duration:0.3s;
+    transition-timing-function: ease-in-out; 
+}
+#upload-button2:hover {
+    background-color: rgb(74, 69, 69);
+    font-size:18px;
+}
+#uploaded-video {
+    width: 100%; 
+    height: 100%; 
+}
+#video-input {
+    display: none;
+}
+#video-container:hover #upload-button {
+    display: block;
+    opacity: 1; 
+}

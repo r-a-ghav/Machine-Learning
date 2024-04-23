@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Upload Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap');
+
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: 'Gilda Display', serif;
+    }
+
+    body {
+        background-color: rgba(128, 128, 128, 0.297);
+    }
+
+    .navbar {
+        padding: 35px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .sidepanel {
+        width: 50%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .heading {
+        width: 100%;
+        text-align: center;
+        font-size: 2.2em;
+        padding: 50px;
+    }
+
+    a {
+        text-decoration-line: none;
+        color: black;
+        transition: 0.3s ease-in-out;
+    }
+
+    a:hover {
+        font-size: 28px;
+    }
+
+    .hero {
+        width: 100vw;
+        /* border:3px solid black; */
+        padding: 20px;
+        backdrop-filter: blur(20px);
+    }
+
+    .image_section {
+        /* border:3px solid red; */
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 0px 10px 20px 0px;
+    }
+
+    .textarea {
+        width: 50%;
+        height: 500px;
+        /* border:2px solid blue; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .textarea h1 {
+        width: 100%;
+        font-size: 3em;
+        text-transform: capitalize;
+        margin-bottom: 30px;
+    }
+
+    .textarea p {
+        font-size: 1.2em;
+    }
+
+    .image {
+        width: 50%;
+        display: flex;
+        height: 100%;
+        /* border:2px solid black; */
+        justify-content: space-around;
+    }
+
+    .video_section {
+        /* border:3px solid red; */
+        padding: 10px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .video {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* border:2px solid black; */
+        align-items: center;
+    }
+
+    #image-container {
+        width: 500px;
+        height: 500px;
+        border: 2px dashed #ddd;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        background-color: #615c5c;
+        text-align: center;
+    }
+
+    #uploaded-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* CSS for the upload button */
+    #upload-button {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 10%;
+        padding: 10px 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(25px);
+        color: #fff;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        font-size: 16px;
+        /* display: none; */
+        opacity: 0;
+        transition-property: background-color, font-size, opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+    }
+
+    #upload-button:hover {
+        background-color: rgba(255, 255, 255, 0.01);
+        font-size: 18px;
+        opacity: 1;
+    }
+
+    /* Style for the file input */
+    #file-input {
+        display: none;
+    }
+
+    #image-container:hover #upload-button {
+        display: block;
+        opacity: 1;
+    }
+
+    #video-container {
+        width: 650px;
+        height: 500px;
+        border: 2px dashed #ddd;
+        border-radius: 8%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        background-color: #f7f7f7c6;
+        text-align: center;
+    }
+
+    #upload-button2 {
+        width: 650px;
+        height: 40px;
+        margin-top: 10px;
+        padding: 10px;
+        background-color: rgba(98, 95, 95, 0.641);
+        backdrop-filter: blur(25px);
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 16px;
+        transition-property: background-color, font-size;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+    }
+
+    #upload-button2:hover {
+        background-color: rgb(74, 69, 69);
+        font-size: 18px;
+    }
+
+    #uploaded-video {
+        width: 100%;
+        height: 100%;
+    }
+
+    #video-input {
+        display: none;
+    }
+
+    #video-container:hover #upload-button {
+        display: block;
+        opacity: 1;
+    }
+</style>
+<script>
+    const fileInput = document.getElementById('file-input');
+    const uploadedImage = document.getElementById('uploaded-image');
+
+    fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                uploadedImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // JavaScript to handle file selection and display the video
+    const videoInput = document.getElementById('video-input');
+    const uploadedVideo = document.getElementById('uploaded-video');
+
+    videoInput.addEventListener('change', function () {
+        const file = videoInput.files[0];
+
+        if (file) {
+            const videoURL = URL.createObjectURL(file);
+            uploadedVideo.src = videoURL;
+        }
+    });
+//     $('#addVideosBtn').click(function() {
+//   $(this).parents().find('#addVideosInput').click();
+// });
+
+// document.getElementById('addVideosInput').onchange = e => {
+//   const file = e.target.files[0];
+//   const url = URL.createObjectURL(file);
+//   const li = ` <li> <video controls="controls" src=" ${url} " type="video/mp4" width="400px" height="200px"></video>
+//        <span><i class="fa fa-trash"></i></span>
+//    </li>`
+//   $('.video-list ul').append(li);
+// };
+</script>
+
+<body>
+    <div class="navbar">
+        <div class="robust"></div>
+        <div class="sidepanel">
+            <h3><a href="#">Image Test</a></h3>
+            <h3><a href="#">Contact</a></h3>
+            <h3><a href="#">About</a></h3>
+            <h3><a href="#">Video Test</a></h3>
+        </div>
+    </div>
+    <div class="heading">
+        <h1>PROTOTYPE</h1>
+        <h1>FOR ML MODEL</h1>
+    </div>
+    <div class="hero">
+        <div class="image_section">
+            <div class="textarea">
+                <h1>upload image here</h1>
+                <p>Upload an image and test your ML model. Our platform allows you to easily evaluate the performance of
+                    your model on various images. </p>
+            </div>
+            <div class="image">
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <input type="file" accept="image/*" id="file-input" style="display: none;" />
+                </form>
+
+                <!-- Image container where the uploaded image will be displayed -->
+                <div id="image-container">
+                    <img id="uploaded-image" src="" alt="">
+                    <label for="file-input" id="upload-button">Upload Image</label>
+                </div>
+            </div>
+        </div>
+        <div class="video_section">
+            <div class="textarea">
+                <h1>upload video here</h1>
+                <p>Upload a video and test your ML model. Evaluate the performance and accuracy of your machine learning
+                    model on different videos. </p>
+            </div>
+            <div class="video">
+                <form action="/predict" method="POST" enctype="multipart/form-data">
+                    <input type="file" accept="video/*" name="video_input" id="video-input" style="display: none;" />
+                    <input type="submit" id="addVideosBtn" value="predict" style="display: none;" />
+                </form>
+
+                <!-- Video container where the uploaded video will be displayed -->
+                <div id="video-container">
+                    <video id="uploaded-video" controls>
+                        <!-- <source src="C:\Users\ragha\Desktop\ML\SIH\HUMAN-TARGET-main\videos\videoplayback.mp4" type="video/mp4"> -->
+                    </video>
+                </div>
+                <label for="video-input" id="upload-button2">Upload Video</label>
+                <label for="addVideosBtn" id="upload-button2">Predict</label>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
